@@ -1,0 +1,86 @@
+{% extends "blog/base.html.twig" %}
+
+{% block body %}
+
+
+<section class="page-title bg-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <h1>Blog Full Width</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, ex!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="page-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <a href="/article/new" class="btn btn-main">create new article</a>
+
+                {% for article in articles %}
+                    <div class="post">
+                        <div class="post-media post-thumb">
+                            <a href="blog-single.html">
+                                <img src="{{ article.getImageUrl() }}" style="height: 200px; width: auto; margin-top: 8px" alt="">
+                            </a>
+                        </div>
+                        <h3 class="post-title"><a href="blog-single.html">{{ article.getTitle() }}</a></h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li>
+                                    <i class="ion-calendar"></i> 20, MAR 2020
+                                </li>
+                                <li>
+                                    <i class="ion-android-people"></i> POSTED BY {{ article.getCreator() }}
+                                </li>
+                                <li>
+                                   <i class="ion-pricetags"></i> {{ article.getCategory().getLabel() }}
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="post-content">
+                            <p>{{ article.getContent() }}</p>
+                            <a href="blog-single.html" class="btn btn-main">Continue Reading</a>
+                            <a href="/article/{{ article.getId() }}/edit" class="btn btn-main">EDIT</a>
+                        </div>
+
+                        {% for notice in article.getNotices() %}
+                            <div class="post-content">
+                                <h5>Avis de : {{ notice.getAuthor() }}</h5>
+                                <p>{{ notice.getContent() }}</p>
+                                <h6 style="color: #ffc107"><span style="color: #000">Note :</span>
+                                    {% for i in 1..5 %}
+                                        {% if i <= notice.getNote() %}
+                                            ★
+                                        {% else %}
+                                            ☆
+                                        {% endif %}
+                                    {% endfor %}
+                                </h6>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                {% endfor %}
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination post-pagination">
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_fullwidth") }}">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_fullwidth") }}">1</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_fullwidth") }}">2</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_fullwidth") }}">3</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ path("blog_fullwidth") }}">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

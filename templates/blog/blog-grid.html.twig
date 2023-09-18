@@ -1,0 +1,88 @@
+{% extends "blog/base.html.twig" %}
+
+
+{% block body %}
+	<section class="page-title bg-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<h1>Blogs</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, quibusdam.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<div class="page-wrapper">
+		<div class="container">
+			<div class="row">
+				{% for article in articles %}
+					<div class="col-md-6">
+						<div class="post">
+							<div class="post-thumb">
+								<a href="blog-single.html">
+									<img class="img-fluid" src="{{ article.getImageUrl() }}" alt="">
+								</a>
+							</div>
+							<h3 class="post-title"><a href="blog-single.html">How To Wear Bright Shoes</a></h3>
+							<div class="post-meta">
+								<ul>
+									<li>
+										<i class="ion-calendar"></i> 20, MAR 2020
+									</li>
+									<li>
+										<i class="ion-android-people"></i> POSTED BY {{ article.getCreator() }}
+									</li>
+									<li>
+										<<i class="ion-pricetags"></i> {{ article.getCategory() }}
+									</li>
+
+								</ul>
+							</div>
+							<div class="post-content">
+								<p>{{ article.getContent() }} </p>
+								<a href="blog-single.html" class="btn btn-main">Read More</a>
+							</div>
+
+							{% for notice in article.getNotices() %}
+								<div class="post-content">
+									<h5>Avis de : {{ notice.getAuthor() }}</h5>
+									<p>{{ notice.getContent() }}</p>
+									<h6 style="color: #ffc107"><span style="color: #000">Note :</span>
+										{% for i in 1..5 %}
+											{% if i <= notice.getNote() %}
+												★
+											{% else %}
+												☆
+											{% endif %}
+										{% endfor %}
+									</h6>
+								</div>
+							{% endfor %}
+
+						</div>
+					</div>
+				{% endfor %}
+
+
+
+
+
+
+
+			<nav aria-label="Page navigation example">
+				<ul class="pagination post-pagination justify-content-center">
+					<li class="page-item"><a class="page-link" href="{{ path("blog_grid") }}">Prev</a></li>
+					<li class="page-item"><a class="page-link" href="{{ path("blog_grid") }}">1</a></li>
+					<li class="page-item"><a class="page-link" href="{{ path("blog_grid") }}">2</a></li>
+					<li class="page-item"><a class="page-link" href="{{ path("blog_grid") }}">3</a></li>
+					<li class="page-item"><a class="page-link" href="{{ path("blog_grid") }}">Next</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+{% endblock %}
