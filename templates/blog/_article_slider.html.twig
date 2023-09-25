@@ -1,0 +1,65 @@
+<section class="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h2>Fun Facts About Us</h2>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, <br> there live the
+                        blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="block">
+                    <ul class="counter-box clearfix">
+                        <li>
+                            <div class="counter-item">
+                                <i class="ion-ios-chatboxes-outline"></i>
+                                <h4 class="count" data-count="99">0</h4>
+                                <span>Cups Of Coffee</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="counter-item">
+                                <i class="ion-ios-glasses-outline"></i>
+                                <h4 class="count" data-count="45">0</h4>
+                                <span>Article Written</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="counter-item">
+                                <i class="ion-ios-compose-outline"></i>
+                                <h4 class="count" data-count="125">0</h4>
+                                <span>Projects Completed</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="counter-item">
+                                <i class="ion-ios-timer-outline"></i>
+                                <h4 class="count" data-count="200">0</h4>
+                                <span>Combined Projects</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+                <div class="testimonial-carousel text-center">
+                    <div class="testimonial-slider owl-carousel">
+                        {% for article in articles %}
+                            <div>
+                                <i class="ion-quote"></i>
+                                <p>{{ article.getContent() }}</p>
+                                <div class="user">
+                                    <img src="{{ article.getImageURL() }}" style="border-radius: 50%; width: 75px; height: 75px" alt="Pepole">
+                                    <p><span>{{ article.getCreator() }}</span> {{ article.getDate().format("d, M Y") }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

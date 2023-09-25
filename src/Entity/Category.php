@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -18,6 +19,9 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $label = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class)]
     private Collection $articles;
 
@@ -29,6 +33,17 @@ class Category
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     public function getLabel(): ?string
@@ -72,6 +87,8 @@ class Category
 
         return $this;
     }
+
+
 
     public function __toString(): string
     {

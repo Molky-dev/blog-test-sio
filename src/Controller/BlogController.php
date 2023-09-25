@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\NoticeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,20 +36,57 @@ class BlogController extends AbstractController
         return $this->render('blog/coming-soon.html.twig');
     }
 
-    #[Route("/blog-grid", name: "blog_grid")]
-    public function blockGrid(ArticleRepository $articleRepository): Response
+    #[Route("/blog-grid/{category}", name: "blog_grid", defaults: ["category" => null])]
+    public function blockGrid(?string $category, ArticleRepository $articleRepository, NoticeRepository $noticeRepository, CategoryRepository $categoryRepository): Response
     {
+        if($category != strtolower($category)) {
+            return $this->redirectToRoute("blog_fullwidth", ["category" => strtolower($category)]);
+        }
+
+        if($category) {
+            $category = $categoryRepository->findBy(["slug" => $category]);
+            $articles = $articleRepository->findBy(["category" => $category]);
+        } else {
+            $articles = $articleRepository->findAll();
+        }
+
         return $this->render('blog/blog-grid.html.twig', [
-            'articles' => $articleRepository->findAll()
+            'articles' => $articles,
+            'notice' => $noticeRepository->findAll()
         ]);
     }
 
-    #[Route("/blog-fullwidth", name: "blog_fullwidth")]
-    public function blockFullwidth(ArticleRepository $articleRepository, NoticeRepository $noticeRepository): Response
+    #[Route("/blog-fullwidth/{category}", name: "blog_fullwidth", defaults: ["category" => null])]
+    public function blockFullwidth(?string $category, ArticleRepository $articleRepository, NoticeRepository $noticeRepository, CategoryRepository $categoryRepository): Response
     {
+        if($category != strtolower($category)) {
+            return $this->redirectToRoute("blog_fullwidth", ["category" => strtolower($category)]);
+        }
+        if($category) {
+            $category = $categoryRepository->findBy(["slug" => $category]);
+            $articles = $articleRepository->findBy(["category" => $category]);
+        } else {
+            $articles = $articleRepository->findAll();
+        }
+
         return $this->render('blog/blog-full-width.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
             'notice' => $noticeRepository->findAll()
+        ]);
+
+    }
+
+    public function renderCategories(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('blog/_categories.html.twig', [
+            'categories' => $categoryRepository->findAll()
+        ]);
+    }
+
+    public function renderArticleSlider(ArticleRepository $articleRepository) : Response
+    {
+        return $this->render('blog/_article_slider.html.twig', [
+            'articles' => $articleRepository->findBy([], ["date" => "DESC"], 3)
         ]);
     }
 

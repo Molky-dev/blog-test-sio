@@ -109,6 +109,7 @@
                                         <li><a class="dropdown-item @@pricing" href="pricing.html">Pricing Table</a></li>
                                     </ul>
                                 </li>
+                                {{ render(controller('App\\Controller\\BlogController::renderCategories')) }}
                                 <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_register") }}">Register</a></li>
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                     <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_logout") }}">Logout</a></li>

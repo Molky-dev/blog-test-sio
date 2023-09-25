@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Notice;
 use App\Entity\User;
+use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -30,7 +31,9 @@ class AppFixtures extends Fixture
         }
         for ($j = 0; $j < 20; $j++) {
             $category = new Category();
-            $category->setLabel($faker->city());
+            $city = $faker->city();
+            $category->setLabel($city);
+            $category->setSlug((new Slugify())->slugify($city));
             $manager->persist($category);
             $categories[] = $category;
         }
