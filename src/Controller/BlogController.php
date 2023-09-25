@@ -90,4 +90,13 @@ class BlogController extends AbstractController
         ]);
     }
 
+
+    public function numberOfArticleWritten(ArticleRepository $articleRepository) : Response
+    {
+        return $this->render('blog/_articleWritten.html.twig', [
+            'numberOfArticles' => count($articleRepository->findBy([]))
+        ]);
+    }
+
+
 }

@@ -23,7 +23,7 @@
                         <li>
                             <div class="counter-item">
                                 <i class="ion-ios-glasses-outline"></i>
-                                <h4 class="count" data-count="45">0</h4>
+                                {{ render(controller("App\\Controller\\BlogController::numberOfArticleWritten")) }}
                                 <span>Article Written</span>
                             </div>
                         </li>
