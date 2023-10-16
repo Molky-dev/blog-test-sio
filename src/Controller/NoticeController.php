@@ -76,6 +76,6 @@ class NoticeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_notice_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('blog_fullwidth', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -39,8 +39,14 @@ class AppFixtures extends Fixture
         }
         for ($k = 0; $k < 50; $k++) {
             $article = new Article();
-            $article->setTitle($faker->unique()->sentence());
-            $article->setContent($faker->text());
+            $title = $faker->unique()->sentence();
+            $articleContent = "<h1>" . $title . "</h1><br>"
+                . "<p>" . $faker->text() . "</p>"
+                . "<p>" . $faker->text() . "</p><br>"
+                . "<p>" . $faker->paragraph(30) . "</p>";
+            $article->setTitle($title);
+            $article->setSlug((new Slugify())->slugify($title));
+            $article->setContent($articleContent);
             $article->setDate($faker->unique()->dateTime());
             $article->setCreator($users[$faker->numberBetween(0, count($users) - 1)]);
             $article->setCategory($categories[$faker->numberBetween(0, count($categories) - 1)]);

@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\NoticeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -76,6 +77,18 @@ class BlogController extends AbstractController
 
     }
 
+    #[Route("/blog-single/{slug}", name: "app_article_single")]
+    public function blockSingle(string $slug, ArticleRepository $articleRepository, NoticeRepository $noticeRepository): Response
+    {
+        $article = $articleRepository->findOneBy(["slug" => $slug]);
+        $notices = $noticeRepository->findBy(["article" => $article]);
+
+        return $this->render('blog/blog-single.html.twig', [
+            'article' => $article,
+            'notices' => $notices
+        ]);
+    }
+
     public function renderCategories(CategoryRepository $categoryRepository): Response
     {
         return $this->render('blog/_categories.html.twig', [
@@ -97,6 +110,29 @@ class BlogController extends AbstractController
             'numberOfArticles' => count($articleRepository->findBy([]))
         ]);
     }
+
+    #[Route("/blog-search", name: "search")]
+    public function searchBar(Request $request, ArticleRepository $articleRepository) {
+        $searchTerm = $request->request->get('search');
+        if (!empty($searchTerm)) {
+            $articles = $articleRepository->createQueryBuilder('a')
+                ->where('a.title LIKE :searchTerm OR a.content LIKE :searchTerm')
+                ->setParameter('searchTerm', '%' . $searchTerm . '%')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $articles = $articleRepository->findAll();
+            return $this->render('blog/blog-full-width.html.twig', [
+                'articles' => $articles,
+            ]);
+        }
+
+        return $this->render('blog/blog-full-width.html.twig', [
+            'articles' => $articles,
+            'searchTerm' => $searchTerm,
+        ]);
+    }
+
 
 
 }

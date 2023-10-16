@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230925093647 extends AbstractMigration
+final class Version20231009124231 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20230925093647 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE article (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, creator_id INTEGER NOT NULL, category_id INTEGER NOT NULL, title VARCHAR(100) NOT NULL, content CLOB NOT NULL, date DATETIME DEFAULT NULL, image_url CLOB DEFAULT NULL, CONSTRAINT FK_23A0E6661220EA6 FOREIGN KEY (creator_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_23A0E6612469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('CREATE TABLE article (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, creator_id INTEGER NOT NULL, category_id INTEGER NOT NULL, title VARCHAR(100) NOT NULL, content CLOB NOT NULL, date DATETIME DEFAULT NULL, slug VARCHAR(255) DEFAULT NULL, image_url CLOB DEFAULT NULL, CONSTRAINT FK_23A0E6661220EA6 FOREIGN KEY (creator_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_23A0E6612469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_23A0E6661220EA6 ON article (creator_id)');
         $this->addSql('CREATE INDEX IDX_23A0E6612469DE2 ON article (category_id)');
         $this->addSql('CREATE TABLE category (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, label VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL)');

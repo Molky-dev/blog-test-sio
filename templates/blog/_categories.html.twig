@@ -2,7 +2,7 @@
     <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories <span class="ion-ios-arrow-down"></span></a>
     <ul class="dropdown-menu overflow-auto" aria-labelledby="dropdown03" style="height: 300px;">
         {% for category in categories %}
-            <li><a href="{{ path("blog_fullwidth", {"category": category.getId() }) }}" class="dropdown-item @@category{{ category.getId() }}">{{ category.getLabel() }}</a></li>
+            <li><a href="{{ path("blog_fullwidth", {"category": category.getSlug() }) }}" class="dropdown-item @@category{{ category.getId() }}">{{ category.getLabel() }}</a></li>
         {% endfor %}
     </ul>
 </li>

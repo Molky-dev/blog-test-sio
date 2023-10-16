@@ -30,7 +30,7 @@
                                 <img src="{{ article.getImageUrl() }}" style="height: 200px; width: auto; margin-top: 8px" alt="">
                             </a>
                         </div>
-                        <h3 class="post-title"><a href="blog-single.html">{{ article.getTitle() }}</a></h3>
+                        <h3 class="post-title"><a href="blog-single.html">{{ article.getTitle()|raw }}</a></h3>
                         <div class="post-meta">
                             <ul>
                                 <li>
@@ -45,28 +45,28 @@
 
                             </ul>
                         </div>
-                        <div class="post-content">
-                            <p>{{ article.getContent() }}</p>
-                            <a href="blog-single.html" class="btn btn-main">Continue Reading</a>
-                            <a href="/article/{{ article.getId() }}/edit" class="btn btn-main">EDIT</a>
-                        </div>
-
-                        {% for notice in article.getNotices() %}
-                            <div class="post-content">
-                                <h5>Avis de : {{ notice.getAuthor() }}</h5>
-                                <p>{{ notice.getContent() }}</p>
-                                <h6 style="color: #ffc107"><span style="color: #000">Note :</span>
-                                    {% for i in 1..5 %}
-                                        {% if i <= notice.getNote() %}
-                                            ★
-                                        {% else %}
-                                            ☆
-                                        {% endif %}
-                                    {% endfor %}
-                                </h6>
+                        <div class="post-content" >
+                            <div style="width: auto; height: 10vh; overflow: hidden;">
+                            <p>{{ article.getContent()|raw
+                                }}</p>
                             </div>
-                        {% endfor %}
-
+                            <div class="buttonsArticle"  style="display: flex; flex-direction: row;">
+                                <a href="{{ path('app_article_single', {
+                                    'slug': article.getSlug(),
+                                }) }}" class="btn btn-main">Continue Reading</a>
+                                {% if is_granted("EDIT", article) %}
+                                    <a href="/article/{{ article.getId() }}/edit" class="btn btn-main">EDIT</a>
+                                {% endif %}
+                                {% if is_granted("DELETE", article) %}
+                                    <form action="{{ path('app_article_delete', {
+                                        'id': article.getId()
+                                    }) }}" method="post">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.getId()) }}">
+                                        <input type="submit" class="btn btn-main" value="DELETE">
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
 

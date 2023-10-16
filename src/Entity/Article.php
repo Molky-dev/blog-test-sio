@@ -2,41 +2,62 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article']],
+)]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article', 'category', 'notice', 'user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['article'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['article'])]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['article'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['article'])]
     private ?User $creator = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['article'])]
     private ?Category $category = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Notice::class)]
+    #[MaxDepth(1)]
+    #[Groups(['article'])]
     private Collection $notices;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(['article'])]
+    private ?string $slug = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['article'])]
     private ?string $imageUrl = null;
 
     public function __construct()
@@ -47,6 +68,11 @@ class Article
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     public function getTitle(): ?string
@@ -88,6 +114,11 @@ class Article
     public function getCreator(): ?User
     {
         return $this->creator;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function setCreator(?User $creator): static

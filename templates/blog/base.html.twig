@@ -4,43 +4,42 @@
 
     {% block head %}
 
-    <!-- Basic Page Needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>Airspace | Creative Agency Bootstrap Template</title>
+        <!-- Basic Page Needs
+        ================================================== -->
+        <meta charset="utf-8">
+        <title>Airspace | Creative Agency Bootstrap Template</title>
 
-    <!-- Mobile Specific Metas
-    ================================================== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Creative Agency Bootstrap Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="author" content="Themefisher">
-    <meta name="theme-name" content="airspace">
-    <meta name="generator" content="Themefisher Airspace Template v1.0">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset("assets/images/favicon.png") }}" />
+        <!-- Mobile Specific Metas
+        ================================================== -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Creative Agency Bootstrap Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+        <meta name="author" content="Themefisher">
+        <meta name="theme-name" content="airspace">
+        <meta name="generator" content="Themefisher Airspace Template v1.0">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset("assets/images/favicon.png") }}"/>
 
 
-    <!-- bootstrap.min css -->
-    <link rel="stylesheet" href="{{ asset("assets/plugins/bootstrap/bootstrap.min.css") }}">
-    <!-- Ionic Icon Css -->
-    <link rel="stylesheet" href="{{ asset("assets/plugins/Ionicons/css/ionicons.min.css") }}">
-    <!-- animate.css -->
-    <link rel="stylesheet" href="{{ asset("assets/plugins/animate-css/animate.css") }}">
-    <!-- Magnify Popup -->
-    <link rel="stylesheet" href="{{ asset("assets/plugins/magnific-popup/magnific-popup.css") }}">
-    <!-- Slick CSS -->
-    <link rel="stylesheet" href="{{ asset("assets/plugins/slick/slick.css") }}">
-
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+        <!-- bootstrap.min css -->
+        <link rel="stylesheet" href="{{ asset("assets/plugins/bootstrap/bootstrap.min.css") }}">
+        <!-- Ionic Icon Css -->
+        <link rel="stylesheet" href="{{ asset("assets/plugins/Ionicons/css/ionicons.min.css") }}">
+        <!-- animate.css -->
+        <link rel="stylesheet" href="{{ asset("assets/plugins/animate-css/animate.css") }}">
+        <!-- Magnify Popup -->
+        <link rel="stylesheet" href="{{ asset("assets/plugins/magnific-popup/magnific-popup.css") }}">
+        <!-- Slick CSS -->
+        <link rel="stylesheet" href="{{ asset("assets/plugins/slick/slick.css") }}">
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
     {% endblock %}
 
 </head>
 
 <body id="body">
 
-    {% block header %}
+{% block header %}
     <header class="navigation">
         <div class="container">
             <div class="row">
@@ -50,7 +49,9 @@
                             <img src="{{ asset("assets/images/logo.png") }}" alt="Logo">
                         </a>
 
-                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                                data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false"
+                                aria-label="Toggle navigation">
                             <span class="ion-android-menu"></span>
                         </button>
 
@@ -60,63 +61,96 @@
                                     <a class="nav-link" href="{{ path("blog_index") }}">Home</a>
                                 </li>
                                 <li class="nav-item dropdown @@portfolio">
-                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio <span class="ion-ios-arrow-down"></span></a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">Portfolio <span
+                                                class="ion-ios-arrow-down"></span></a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                                        <li><a class="dropdown-item @@portfolioFilter" href="portfolio.html">Portfolio Filter</a></li>
-                                        <li><a class="dropdown-item @@portfolioSingle" href="portfolio-single.html">Portfolio Single</a></li>
+                                        <li><a class="dropdown-item @@portfolioFilter" href="portfolio.html">Portfolio
+                                                Filter</a></li>
+                                        <li><a class="dropdown-item @@portfolioSingle" href="portfolio-single.html">Portfolio
+                                                Single</a></li>
 
                                         <li class="dropdown dropdown-submenu dropright">
-                                            <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
+                                            <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301"
+                                               role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub
+                                                Menu</a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdown0301">
-                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu 01</a></li>
-                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu 02</a></li>
+                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu
+                                                        01</a></li>
+                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu
+                                                        02</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item @@service"><a class="nav-link" href="service.html">Service</a></li>
                                 <li class="nav-item dropdown @@blog">
-                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true"
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                                       aria-haspopup="true"
                                        aria-expanded="false">Blog <span class="ion-ios-arrow-down"></span></a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                                        <li><a class="dropdown-item @@blogGrid" href="{{ path("blog_grid") }}">Blog Grid</a></li>
-                                        <li><a class="dropdown-item @@blogSingle" href="blog-single.html">Blog Single</a></li>
-                                        <li><a class="dropdown-item @@blogRS" href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a class="dropdown-item @@blogLS" href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a class="dropdown-item @@blogFW" href="{{ path("blog_fullwidth") }}">Blog Full Width</a></li>
+                                        <li><a class="dropdown-item @@blogGrid" href="{{ path("blog_grid") }}">Blog
+                                                Grid</a></li>
+                                        <li><a class="dropdown-item @@blogSingle" href="blog-single.html">Blog
+                                                Single</a></li>
+                                        <li><a class="dropdown-item @@blogRS" href="blog-right-sidebar.html">Blog Right
+                                                Sidebar</a></li>
+                                        <li><a class="dropdown-item @@blogLS" href="blog-left-sidebar.html">Blog Left
+                                                Sidebar</a></li>
+                                        <li><a class="dropdown-item @@blogFW" href="{{ path("blog_fullwidth") }}">Blog
+                                                Full Width</a></li>
 
                                         <li class="dropdown dropdown-submenu dropleft">
-                                            <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0501" role="button"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
+                                            <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0501"
+                                               role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub
+                                                Menu</a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdown0501">
-                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu 01</a></li>
-                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu 02</a></li>
+                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu
+                                                        01</a></li>
+                                                <li><a class="dropdown-item" href="{{ path("blog_index") }}">Submenu
+                                                        02</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown @@pages">
-                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true"
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                                       aria-haspopup="true"
                                        aria-expanded="false">Pages <span class="ion-ios-arrow-down"></span></a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                                        <li><a class="dropdown-item @@about" href="{{ path("blog_about") }}">About Us</a></li>
-                                        <li><a class="dropdown-item @@comingSoon" href="{{ path("blog_coming_soon") }}">Coming Soon</a></li>
-                                        <li><a class="dropdown-item @@404" href="{{ path("blog_404") }}">404 Page</a></li>
+                                        <li><a class="dropdown-item @@about" href="{{ path("blog_about") }}">About
+                                                Us</a></li>
+                                        <li><a class="dropdown-item @@comingSoon" href="{{ path("blog_coming_soon") }}">Coming
+                                                Soon</a></li>
+                                        <li><a class="dropdown-item @@404" href="{{ path("blog_404") }}">404 Page</a>
+                                        </li>
                                         <li><a class="dropdown-item @@faq" href="faq.html">FAQ</a></li>
-                                        <li><a class="dropdown-item @@pricing" href="pricing.html">Pricing Table</a></li>
+                                        <li><a class="dropdown-item @@pricing" href="pricing.html">Pricing Table</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 {{ render(controller('App\\Controller\\BlogController::renderCategories')) }}
-                                <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_register") }}">Register</a></li>
+                                <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_register") }}">Register</a>
+                                </li>
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                    <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_logout") }}">Logout</a></li>
+                                    <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_logout") }}">Logout</a>
+                                    </li>
                                 {% else %}
-                                    <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_login") }}">Login</a></li>
+                                    <li class="nav-item @@contact"><a class="nav-link" href="{{ path("app_login") }}">Login</a>
+                                    </li>
 
                                 {% endif %}
+
+                                <form class="form-inline" method="post" action="{{ path("search") }}">
+                                    <input class="form-control mr-sm-2" id="search" name="search" type="search"
+                                           placeholder="Search" aria-label="Search" value="{{ searchTerm ?? '' }}">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+
                             </ul>
                         </div>
                     </nav>
@@ -124,15 +158,15 @@
             </div>
         </div>
     </header>
-    {% endblock %}
+{% endblock %}
 
-    {% block body %}
+{% block body %}
 
-    {% endblock %}
+{% endblock %}
 
-    {% block javascript %}
-    <!-- Main jQuery -->
-    <script src="{{ asset("assets/plugins/jquery/jquery.min.js") }}"></script>
+{% block javascript %}
+<!-- Main jQuery -->
+<script src="{{ asset("assets/plugins/jquery/jquery.min.js") }}"></script>
     <!-- Bootstrap 3.1 -->
     <script src="{{ asset("assets/plugins/bootstrap/bootstrap.min.js") }}"></script>
     <!-- slick Carousel -->
@@ -146,6 +180,66 @@
     <script src="{{ asset("assets/plugins/google-map/map.js") }}"></script>
 
     <script src="{{ asset("assets/js/script.js") }}"></script>
+    <script src="https://cdn.tiny.cloud/1/z58e0ubqb33l2wk54j5tte5a58kmyvlpykqialvxx8mc16yw/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons accordion',
+            editimage_cors_hosts: ['picsum.photos'],
+            menubar: 'file edit view insert format tools table help',
+            toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+            autosave_ask_before_unload: true,
+            autosave_interval: '30s',
+            autosave_prefix: '{path}{query}-{id}-',
+            autosave_restore_when_empty: false,
+            autosave_retention: '2m',
+            image_advtab: true,
+            link_list: [
+                { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+            ],
+            image_list: [
+                { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+            ],
+            image_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Some class', value: 'class-name' }
+            ],
+            importcss_append: true,
+            file_picker_callback: (callback, value, meta) => {
+            /* Provide file and text for the link dialog */
+            if (meta.filetype === 'file') {
+                callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+            }
+
+            /* Provide image and alt text for the image dialog */
+            if (meta.filetype === 'image') {
+                callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+            }
+
+            /* Provide alternative source and posted for the media dialog */
+            if (meta.filetype === 'media') {
+                callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+            }
+            },
+            templates: [
+                { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%" border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+                { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+                { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+            ],
+            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+            height: 600,
+            image_caption: true,
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            noneditable_class: 'mceNonEditable',
+            toolbar_mode: 'sliding',
+            contextmenu: 'link image table',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+        });
+    </script>
 
     {% endblock %}
 
@@ -166,7 +260,8 @@
                             <li><a href="pricing.html">Pricing</a></li>
                         </ul>
                     </div>
-                    <p class="copyright mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; Designed & Developed by <a
+                    <p class="copyright mb-0">Copyright
+                        <script>document.write(new Date().getFullYear())</script> &copy; Designed & Developed by <a
                                 href="http://www.themefisher.com">Themefisher</a>. All rights reserved.
                         <br> Get More <a href="https://themefisher.com/free-bootstrap-templates/">Free Bootstrap
                             Templates</a>

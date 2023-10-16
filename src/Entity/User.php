@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,33 +12,48 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['mail'], message: 'There is already an account with this mail')]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection()
+    ],
+    normalizationContext: ['groups' => ['user']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article', 'notice', 'user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['user'])]
     private ?string $username = null;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['user'])]
     private array $roles = [];
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user'])]
     private ?string $mail = null;
 
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Article::class)]
+    #[Groups(['user'])]
     private Collection $articles;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Notice::class)]
+    #[Groups(['user'])]
     private Collection $notices;
 
     public function __construct()

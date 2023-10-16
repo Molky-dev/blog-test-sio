@@ -2,29 +2,49 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\NoticeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: NoticeRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(),
+        new Delete()
+    ],
+    normalizationContext: ['groups' => ['notice']]
+)]
 class Notice
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article', 'notice', 'user'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['notice'])]
     private ?string $content = null;
 
     #[ORM\Column]
+    #[Groups(['notice'])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'notices')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['notice'])]
     private ?User $author = null;
 
     #[ORM\ManyToOne(inversedBy: 'notices')]
+    #[Groups(['notice'])]
     private ?Article $article = null;
 
     public function getId(): ?int

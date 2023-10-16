@@ -25,7 +25,7 @@ class ArticleCrudController extends AbstractCrudController
         return [
             IntegerField::new('id'),
             TextField::new('title'),
-            TextField::new('content'),
+            TextEditorField::new('content'),
             DateTimeField::new('date')->setFormat("Y/M/d"),
             AvatarField::new('imageUrl')
         ];

@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\Article1Type;
 use App\Repository\ArticleRepository;
+use App\services\BlogSlugger;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -30,6 +33,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setSlug(BlogSlugger::slugify($article->getTitle()));
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -50,6 +54,13 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Article $article
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     * @Security ("is_granted('ROLE_ADMIN') or is_granted('EDIT', article)", message="You are not allowed to edit this article")
+     */
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +79,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @param Request $request
+     * @param Article $article
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     * @Security ("is_granted('ROLE_ADMIN') or is_granted('DELETE', article)", message="You are not allowed to delete this article")
+     */
     #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
@@ -76,6 +95,6 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('blog_fullwidth', [], Response::HTTP_SEE_OTHER);
     }
 }
