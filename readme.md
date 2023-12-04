@@ -85,5 +85,3 @@ sudo systemctl restart apache2
 
 
 <span>Pensez à vérifier la configuration du site apache</span>
-
-<p>Vous pouvez maintenant accéder au blog à l'adresse suivante : <a href="http://localhost:8000">http://localhost:8000</a></p>
