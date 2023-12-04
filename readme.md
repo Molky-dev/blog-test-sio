@@ -62,6 +62,11 @@ sudo apt install libapache2-mod-php8.2
 <pre><code>composer install
 </code></pre>
 
+<p>Activer le module PHP</p>
+
+<pre><code>sudo a2enmod php8.2
+sudo systemctl restart apache2
+</code></pre>
 <p>Créer la base de données</p>
 
 <pre><code>php bin/console doctrine:database:create
