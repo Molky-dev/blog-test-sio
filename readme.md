@@ -85,3 +85,5 @@ sudo systemctl restart apache2
 
 
 <span>Pensez à vérifier la configuration du site apache</span>
+
+![Photos pour thibault](https://www.booska-p.com/wp-content/uploads/2022/10/amouranth.jpg)
